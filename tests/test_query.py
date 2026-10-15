@@ -1,5 +1,7 @@
 import unittest
 
+from wox_plugin import Context, Query, QueryEnv, QueryType, Selection
+
 from src.main import MyPlugin
 
 
@@ -8,7 +10,16 @@ class TestMyPlugin(unittest.TestCase):
         self.plugin = MyPlugin()
 
     def test_query(self):
-        results = self.plugin.query(None, {"search": "test"})
+        results = self.plugin.query(
+            Context.new(),
+            Query(
+                id="test",
+                type=QueryType.INPUT,
+                env=QueryEnv(),
+                raw_query="",
+                selection=Selection(),
+            ),
+        )
         self.assertIsNotNone(results)
 
 
