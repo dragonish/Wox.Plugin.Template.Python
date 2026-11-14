@@ -4,8 +4,8 @@
 
 # {{.Name}}
 
-# Install
+## Install
 
-```
+```shell
 wpm install {{.Name}}
 ```
