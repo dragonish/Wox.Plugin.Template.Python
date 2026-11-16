@@ -1,7 +1,8 @@
-.PHONY: help init check-init check-dev-deps install clean lint format build test package
+.PHONY: help init check-init check-dev-deps install clean lint format build test package pr-docs
 
 DIST_DIR := dist
 SRC_DIR := src
+PR_ARGS ?=
 
 ifeq ($(OS),Windows_NT)
 SHELL := powershell.exe
@@ -18,6 +19,7 @@ help:
 	@echo "  make clean   - Clean build directory"
 	@echo "  make build   - Build project"
 	@echo "  make package - Build plugin package"
+	@echo "  make pr-docs - Generate store entry and PR description in docs/"
 
 init:
 	$(PYTHON) scripts/init-wox-project.py
@@ -90,3 +92,6 @@ else
 	cd $(DIST_DIR) && zip -r "../wox.plugin.{{.Name}}.wox" .
 	rm -rf $(DIST_DIR)
 endif
+
+pr-docs: check-init
+	$(PYTHON) scripts/generate-store-pr.py $(PR_ARGS)

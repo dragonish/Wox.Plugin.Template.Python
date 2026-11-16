@@ -173,3 +173,5 @@ wox.plugin.killprocess.wox
 .DS_Store
 **/.DS_Store
 .DS_Store?
+
+docs/
